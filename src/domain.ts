@@ -5,6 +5,11 @@ type Hand = 'rock' | 'paper' | 'scissors'
 export class RPS {
   id: string = util.getRandomString()
   hands: Hand[] = []
+  seed: number
+
+  constructor(seed: number) {
+    this.seed = seed
+  }
 
   show(): Hand {
     const hand = this.getHand()
@@ -21,8 +26,7 @@ export class RPS {
   }
 
   private getHand() {
-    const rand = Math.random()
-
+    const rand = Math.random() + this.seed
     if (rand <= 0.333) {
       return 'rock'
     } else if (rand <= 0.666) {

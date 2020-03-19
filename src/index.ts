@@ -1,8 +1,8 @@
 import { RPS, buttle } from './domain'
 
 function main() {
-  const p1 = new RPS()
-  const p2 = new RPS()
+  const p1 = new RPS(0.4)
+  const p2 = new RPS(-0.4)
   let p1WinCount = 0
   let p2WinCount = 0
 
@@ -22,7 +22,7 @@ function main() {
     },
     p2: {
       p2WinCount,
-      ...p1.getStatistics(),
+      ...p2.getStatistics(),
     },
   })
 }
