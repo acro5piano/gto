@@ -1,12 +1,20 @@
 import { RPS, buttle } from './domain'
 
 function main() {
-  const p1 = new RPS(0.4)
-  const p2 = new RPS(-0.4)
+  const p1 = new RPS({
+    rock: 0.5,
+    paper: 0.2,
+    scissors: 0.2,
+  })
+  const p2 = new RPS({
+    rock: 0.2,
+    paper: 0.2,
+    scissors: 0.5,
+  })
   let p1WinCount = 0
   let p2WinCount = 0
 
-  for (let i = 0; i < 100000; i++) {
+  for (let i = 0; i < 1000000; i++) {
     const result = buttle(p1, p2)
     if (result.id === p1.id) {
       p1WinCount += 1

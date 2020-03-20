@@ -5,6 +5,9 @@
   "repository": "git@github.com:acro5piano/gto",
   "author": "gosho-kazuya <ketsume0211@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "yarn ts-node -T src/index.ts"
+  },
   "dependencies": {
     "knex": "^0.20.11",
     "sqlite3": "^4.1.1",

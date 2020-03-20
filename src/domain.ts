@@ -1,39 +1,47 @@
 import * as util from './util'
 
-type Hand = 'rock' | 'paper' | 'scissors'
+const HAND = ['rock', 'paper', 'scissors'] as const
+type Hand = typeof HAND[number]
+
+interface Strategy {
+  rock: number
+  paper: number
+  scissors: number
+}
 
 export class RPS {
   id: string = util.getRandomString()
-  hands: Hand[] = []
-  seed: number
+  playedHands: Hand[] = []
+  strategy: Strategy
 
-  constructor(seed: number) {
-    this.seed = seed
+  constructor(strategy: Strategy) {
+    this.strategy = strategy
   }
 
   show(): Hand {
     const hand = this.getHand()
-    this.hands.push(hand)
+    this.playedHands.push(hand)
     return hand
   }
 
   getStatistics() {
     return {
-      rockCount: this.hands.filter(hand => hand === 'rock').length,
-      paperCount: this.hands.filter(hand => hand === 'paper').length,
-      scissorsCount: this.hands.filter(hand => hand === 'scissors').length,
+      rockCount: this.playedHands.filter(hand => hand === 'rock').length,
+      paperCount: this.playedHands.filter(hand => hand === 'paper').length,
+      scissorsCount: this.playedHands.filter(hand => hand === 'scissors').length,
+      strategy: this.strategy,
     }
   }
 
-  private getHand() {
-    const rand = Math.random() + this.seed
-    if (rand <= 0.333) {
-      return 'rock'
-    } else if (rand <= 0.666) {
-      return 'paper'
-    } else {
-      return 'scissors'
+  private getHand(): Hand {
+    const candidates = HAND.filter(hand => {
+      const strategyValue = this.strategy[hand]
+      return Math.random() < strategyValue
+    })
+    if (candidates.length === 1) {
+      return candidates[0]
     }
+    return this.getHand()
   }
 }
 
