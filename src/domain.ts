@@ -1,12 +1,13 @@
 import * as util from './util'
 
-const HAND = ['rock', 'paper', 'scissors'] as const
+const HAND = ['rock', 'paper', 'scissors', 'pin'] as const
 type Hand = typeof HAND[number]
 
 interface Strategy {
   rock: number
   paper: number
   scissors: number
+  pin: number
 }
 
 export class RPS {
@@ -29,6 +30,7 @@ export class RPS {
       rockCount: this.playedHands.filter(hand => hand === 'rock').length,
       paperCount: this.playedHands.filter(hand => hand === 'paper').length,
       scissorsCount: this.playedHands.filter(hand => hand === 'scissors').length,
+      pinCount: this.playedHands.filter(hand => hand === 'pin').length,
       strategy: this.strategy,
     }
   }
@@ -57,7 +59,9 @@ export function buttle(p1: RPS, p2: RPS): RPS {
   if (
     (p1Hand === 'rock' && p2Hand === 'paper') ||
     (p1Hand === 'paper' && p2Hand === 'scissors') ||
-    (p1Hand === 'scissors' && p2Hand === 'rock')
+    (p1Hand === 'scissors' && p2Hand === 'rock') ||
+    (p1Hand === 'pin' && p2Hand === 'rock') ||
+    (p1Hand === 'pin' && p2Hand === 'scissors')
   ) {
     return p2
   } else {

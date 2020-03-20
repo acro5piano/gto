@@ -5,11 +5,13 @@ function main() {
     rock: 0.5,
     paper: 0.2,
     scissors: 0.2,
+    pin: 0.2,
   })
   const p2 = new RPS({
     rock: 0.2,
     paper: 0.2,
     scissors: 0.5,
+    pin: 0.2,
   })
   let p1WinCount = 0
   let p2WinCount = 0
