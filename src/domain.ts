@@ -33,15 +33,18 @@ export class RPS {
     }
   }
 
+  feedback(result: 'win' | 'lose') {
+    const lastHand = this.playedHands.slice(-1)[0]
+    const nextEvaluation = util.getNextEvaluation(this.strategy[lastHand], result === 'win')
+    this.strategy[lastHand] = nextEvaluation
+  }
+
   private getHand(): Hand {
-    const candidates = HAND.filter(hand => {
+    const candidates = HAND.map(hand => {
       const strategyValue = this.strategy[hand]
-      return Math.random() < strategyValue
+      return { hand, eval: Math.random() * strategyValue }
     })
-    if (candidates.length === 1) {
-      return candidates[0]
-    }
-    return this.getHand()
+    return candidates.sort((x, y) => x.eval - y.eval).slice(-1)[0].hand
   }
 }
 

@@ -14,11 +14,15 @@ function main() {
   let p1WinCount = 0
   let p2WinCount = 0
 
-  for (let i = 0; i < 1000000; i++) {
+  for (let i = 0; i < 10 ** 6; i++) {
     const result = buttle(p1, p2)
     if (result.id === p1.id) {
+      p1.feedback('win')
+      p2.feedback('lose')
       p1WinCount += 1
     } else {
+      p1.feedback('lose')
+      p2.feedback('win')
       p2WinCount += 1
     }
   }
